@@ -8,11 +8,11 @@ data = ps.read_csv("clickbait_data.csv")
 data = data[data['clickbait'] == 1]
 nlp = spacy.load("en_core_web_sm")
 
-nlp.add_pipe("merge_subtokens")
+# nlp.add_pipe("merge_subtokens")
 
-nlp.add_pipe("merge_entities")
+# nlp.add_pipe("merge_entities")
 
-nlp.add_pipe("merge_noun_chunks")
+# nlp.add_pipe("merge_noun_chunks")
 
 
 structures = dict()
@@ -34,7 +34,7 @@ with open('./template-based/sentenceStructuresByTag.csv', 'w', newline='') as f:
     w = csv.writer(f)
     for s in structures:
         if(structures[s] > 10):
-            w.writerow([s])
+            w.writerow(s)
 
 with open('template-based\wordListByTag.csv', 'w', newline='') as f:
     writer = csv.writer(f)
