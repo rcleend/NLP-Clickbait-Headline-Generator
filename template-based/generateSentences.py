@@ -1,6 +1,6 @@
 import pandas as ps
 import numpy as np
-nSentences = 1
+nSentences = 10
 
 
 sentStructures = ps.read_csv(
@@ -21,7 +21,9 @@ def generateSentence():
             words = wordList[wordList['tag'] == tag]['word-list']
             word = np.random.choice(words.values[0].split(), 1)
             wordsInSentence.append(word[0])
-    sentence = ''.join(wordsInSentence)
+    sentence = ""
+    for w in wordsInSentence:
+        sentence += w+" "
     return sentence
 
 

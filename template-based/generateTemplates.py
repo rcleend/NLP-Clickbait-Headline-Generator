@@ -23,9 +23,9 @@ for i, sent in enumerate(data['headline']):
     doc = nlp(sent)
     sentStruct = []
     for token in doc:
-        sentStruct.append(token.tag_)
-        if(token.text not in wordList.get(token.tag_, [])):
-            wordList.setdefault(token.tag_, []).append(token.text)
+        sentStruct.append(token.dep_)
+        if(token.text not in wordList.get(token.dep_, [])):
+            wordList.setdefault(token.dep_, []).append(token.text)
     sentStruct = tuple(sentStruct)
     structures[sentStruct] = structures.get(sentStruct, 0) + 1
 
@@ -33,11 +33,11 @@ for i, sent in enumerate(data['headline']):
 with open('./template-based/sentenceStructuresByTag.csv', 'w', newline='') as f:
     w = csv.writer(f)
     for s in structures:
-        if(structures[s] > 10):
+        if(structures[s] > 5):
             w.writerow(s)
 
 with open('template-based\wordListByTag.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerow(["tag", "word-list"])
     for data in wordList:
-        writer.writerow([data, wordList[data]])
+        writer.writerow([data, wordList[data][1:-1]])
