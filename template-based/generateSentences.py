@@ -3,7 +3,7 @@ import numpy as np
 import random
 from gensim.models.word2vec import Word2Vec
 
-nSentences = 10
+nSentences = 5
 useWordEmbedding = True
 model = Word2Vec.load("word2vec.model")
 
@@ -34,7 +34,8 @@ def generateSentence():
                 for word in words:
                     if word in model.wv:
                         score = model.wv.similarity(sentence[i-1], word)
-                        similarityScores.setdefault(word, score)
+                        if score != 1:
+                            similarityScores.setdefault(word, score)
 
                 orderedList = sorted(
                     similarityScores, key=similarityScores.get, reverse=True)
